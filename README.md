@@ -35,10 +35,10 @@ These enhancements will improve user experience and provide additional value to 
 | Spring Data JDBC | Database access framework | [https://spring.io/projects/spring-data-jdbc](https://spring.io/projects/spring-data-jdbc) |
 | Spring MVC | Web framework | [https://docs.spring.io/spring-framework/reference/web/webmvc.html](https://docs.spring.io/spring-framework/reference/web/webmvc.html) |
 | Spring Security | Authentication and authorization framework | [https://spring.io/projects/spring-security](https://spring.io/projects/spring-security) |
-| Gradle | Dependency management tool | [https://gradle.org/](https://gradle.org/) |
+| PostgreSQL | Open-source relational database | [https://www.postgresql.org/](https://www.postgresql.org/) |
 | Java 21 | Programming language | [https://www.oracle.com/java/](https://www.oracle.com/java/) |
+| Session-based Auth | Server-side session management | [https://docs.spring.io/spring-security/reference/servlet/authentication/session-management.html](https://docs.spring.io/spring-security/reference/servlet/authentication/session-management.html) |
 | Docker | Application containerization | [https://www.docker.com](https://www.docker.com) |
-| JWT | Token-based authentication | [https://github.com/jwtk/jjwt](https://github.com/jwtk/jjwt) |
 ### Frontend Technologies
 
 | Technology         | Description                              | Official Website                                  |
@@ -71,15 +71,40 @@ These enhancements will improve user experience and provide additional value to 
 - **RestaurantEntity**: Restaurant details
 - **OrderItemEntity**: Order item information
 
-## Security Implementation
-- Spring Security-based authentication and authorization
-- Current user retrieval using `@AuthenticationPrincipal User`
+## Architecture & Design Patterns
 
-## System Characteristics
-1. RESTful API design pattern
-2. Microservice architecture with frontend-backend separation
-3. Built on Spring ecosystem
-4. Docker containerization for deployment
+This project implements industry-standard software architecture principles and design patterns to ensure maintainability, scalability, and robust security:
+
+### Core Architecture
+
+| Component | Implementation | Benefits |
+| --- | --- | --- |
+| **Layered Architecture** | Controller → Service → Repository structure | Clear separation of responsibilities, enhanced maintainability |
+| **MVC Pattern** | Spring MVC framework | Separation of concerns, improved testability |
+| **RESTful API Design** | HTTP methods, resource-based endpoints | Stateless communication, scalability |
+| **Microservices Approach** | Decoupled frontend-backend architecture | Independent deployment, technology flexibility |
+
+### Design Patterns
+
+| Pattern | Implementation | Purpose |
+| --- | --- | --- |
+| **Dependency Injection** | Spring's annotation-based DI | Loose coupling, better testability |
+| **Repository Pattern** | Spring Data JDBC repositories | Data access abstraction, simplified queries |
+| **Singleton Pattern** | Spring-managed service beans | Resource efficiency, state management |
+| **DTO Pattern** | Data Transfer Objects | Separation of domain and presentation layers |
+
+### Security Architecture
+
+- **Authentication**: Session-based security implementation via Spring Security
+- **Authorization**: Role-based access control for resource protection
+- **Principal Retrieval**: Context-aware user identification using `@AuthenticationPrincipal`
+
+### Infrastructure & Deployment
+
+- **Containerization**: Docker-based application packaging
+- **Cloud Deployment**: AWS App Runner for managed container orchestration
+- **Database**: PostgreSQL with connection pooling
+- **State Management**: Stateless service design with persistent data layer
 
 ## Deployment Environment
 The system is containerized using Docker with docker-compose for orchestration, ensuring portability and rapid deployment capabilities.
@@ -88,7 +113,7 @@ The system is containerized using Docker with docker-compose for orchestration, 
 This project uses Docker for containerization, which provides several advantages:
 
 - **Consistent Environment**: Eliminates "works on my machine" issues by ensuring the same environment across development and production
-- **Isolated Services**: Each component (Spring Boot application, MySQL database) runs in its own container
+- **Isolated Services**: Each component (Spring Boot application, PostgreSQL database) runs in its own container
 - **Easy Scaling**: Container orchestration simplifies horizontal scaling as needed
 - **Simplified Deployment**: Single command deployment with docker-compose
 
@@ -103,11 +128,9 @@ The Online Order System has been successfully deployed to Amazon Web Services (A
 - **Global Reach**: Fast access for users regardless of geographic location
 
 The deployment architecture includes:
-- EC2 instances for hosting the containerized application
-- RDS for managed MySQL database services
-- Elastic Load Balancer for traffic distribution
+- AWS App Runner for hosting and automatically scaling the containerized application
+- RDS PostgreSQL as a managed database service
 - AWS IAM for access control and security
-
 ![AWS Deployment](https://github.com/jjMurphy1012/OnlineOrder/raw/main/image/img_8.png)
 
-This cloud-based approach ensures the application remains robust, secure, and accessible to users at all times while minimizing operational overhead.
+This cloud-based solution ensures the application remains robust, secure, and accessible to users while minimizing operational overhead.
