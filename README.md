@@ -38,7 +38,6 @@ These enhancements will improve user experience and provide additional value to 
 |--------------------|------------------------------------------|---------------------------------------------------|
 | React              | JavaScript library for building UI       | https://reactjs.org/                              |
 | Ant Design (antd)  | UI component library for enterprise apps | https://ant.design/                               |
-| Axios              | HTTP client for API communication        | https://github.com/axios/axios                    |
 | React Hooks        | React's built-in state and lifecycle API | https://reactjs.org/docs/hooks-intro.html         |
 
 ## Core Functional Modules
