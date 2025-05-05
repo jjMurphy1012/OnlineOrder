@@ -1,4 +1,10 @@
 package com.laioffer.onlineorder.model;
 
-public class RegisterBody {
+
+public record RegisterBody(
+        String email,
+        String password,
+        String firstName,
+        String lastName
+) {
 }
