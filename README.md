@@ -32,7 +32,7 @@ These enhancements will improve user experience and provide additional value to 
 | Java 21 | Programming language | [https://www.oracle.com/java/](https://www.oracle.com/java/) |
 | Docker | Application containerization | [https://www.docker.com](https://www.docker.com) |
 | JWT | Token-based authentication | [https://github.com/jwtk/jjwt](https://github.com/jwtk/jjwt) |
-## Frontend Technologies
+### Frontend Technologies
 
 | Technology         | Description                              | Official Website                                  |
 |--------------------|------------------------------------------|---------------------------------------------------|
