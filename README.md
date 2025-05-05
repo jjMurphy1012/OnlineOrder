@@ -34,8 +34,6 @@ These enhancements will improve user experience and provide additional value to 
 | JWT | Token-based authentication | [https://github.com/jwtk/jjwt](https://github.com/jwtk/jjwt) |
 ## Frontend Technologies
 
-## Frontend Technology Stack
-
 | Technology         | Description                              | Official Website                                  |
 |--------------------|------------------------------------------|---------------------------------------------------|
 | React              | JavaScript library for building UI       | https://reactjs.org/                              |
