@@ -34,9 +34,14 @@ These enhancements will improve user experience and provide additional value to 
 | JWT | Token-based authentication | [https://github.com/jwtk/jjwt](https://github.com/jwtk/jjwt) |
 ## Frontend Technologies
 
-The frontend is built with:
-- **React**: A JavaScript library for building user interfaces
-- **Ant Design**: A React UI library with a set of high-quality components and designs
+## Frontend Technology Stack
+
+| Technology         | Description                              | Official Website                                  |
+|--------------------|------------------------------------------|---------------------------------------------------|
+| React              | JavaScript library for building UI       | https://reactjs.org/                              |
+| Ant Design (antd)  | UI component library for enterprise apps | https://ant.design/                               |
+| Axios              | HTTP client for API communication        | https://github.com/axios/axios                    |
+| React Hooks        | React's built-in state and lifecycle API | https://reactjs.org/docs/hooks-intro.html         |
 
 ## Core Functional Modules
 ### User Management Module
