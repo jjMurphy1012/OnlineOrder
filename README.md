@@ -12,7 +12,7 @@ The OnlineOrder system is a food ordering platform that connects customers with 
 
 ![System Image 5](https://github.com/jjMurphy1012/OnlineOrder/raw/main/image/img_2.png)
 
-![System Image 6](https://github.com/jjMurphy1012/OnlineOrder/raw/main/image/img_5.png)
+![System Image 6](https://github.com/jjMurphy1012/OnlineOrder/raw/main/image/img_3.png)
 
 ![System Image 7](https://github.com/jjMurphy1012/OnlineOrder/raw/main/image/img_6.png)
 
