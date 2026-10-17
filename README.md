@@ -106,13 +106,19 @@ The application uses a Controller → Service → Repository structure within on
 
 ### Infrastructure & Deployment
 
-- **Deployment exercise**: Docker and AWS screenshots are retained below as historical project context
+- **Historical deployment**: A container image built with Gradle `bootBuildImage`, published to Amazon ECR, and deployed on AWS App Runner with Amazon RDS PostgreSQL
 - **Database**: PostgreSQL with connection pooling
 - **State Management**: PostgreSQL persistence, server-side login sessions, and an in-process Caffeine cache
 
-## Deployment Exercise
+## Historical AWS Deployment
 
-The original screenshots show a Docker/AWS deployment exercise. This checkout has no Dockerfile and its `docker-compose.yml` is empty, so it does not currently provide a reproducible Compose deployment. Use the local PostgreSQL benchmark instructions for the configuration tested in this repository.
+The project owner confirms that the application was containerized using Gradle `bootBuildImage`, pushed to Amazon ECR, and deployed on AWS App Runner, with PostgreSQL hosted on Amazon RDS. The original README records App Runner and RDS, and the screenshots below preserve Docker and App Runner deployment context.
+
+`bootBuildImage` uses Cloud Native Buildpacks through the Docker daemon; a handwritten Dockerfile is not required for this build route. A build command has the form `./gradlew bootBuildImage --imageName=onlineorder:<version>`. The historical image tag, builder version, and complete cloud configuration were not retained in the repository. The empty `docker-compose.yml` is not a working deployment recipe.
+
+The release flow is: bundled React assets and Spring Boot application → container image → Amazon ECR → AWS App Runner. At runtime, the Spring Boot application connects to Amazon RDS PostgreSQL through JDBC. Application configuration accepts database host, port, username, and password through environment variables. The database name in the default JDBC URL is `onlineorder`.
+
+The original RDS network configuration is not recorded, so public database connectivity versus a VPC connector cannot be reconstructed from this checkout. Current service availability and deployment of the later benchmark optimization have not been verified.
 
 ### Docker Screenshot
 
@@ -120,10 +126,10 @@ The original screenshots show a Docker/AWS deployment exercise. This checkout ha
 
 ### AWS Screenshot
 
-The original project description identifies AWS App Runner and RDS PostgreSQL as the deployment environment. No current cloud deployment or availability verification is included in the local test results.
+The CloudWatch screenshot shows App Runner log groups for the `onlineorder` service. It records historical deployment activity, not a current health check or a complete deployment log.
 ![AWS Deployment](https://github.com/jjMurphy1012/OnlineOrder/raw/main/image/img_8.png)
 
-The screenshots document the original deployment exercise. Local benchmark results do not establish cloud availability, throughput, or current deployment health.
+Local benchmark results establish the reported service-layer behavior on an isolated PostgreSQL fixture; they do not establish AWS latency, throughput, availability, or current deployment health.
 
 ## Demo boundaries
 
