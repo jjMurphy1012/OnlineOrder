@@ -30,7 +30,7 @@ public class AppConfig {
         userDetailsManager.setCreateUserSql("INSERT INTO customers (email, password, enabled) VALUES (?,?,?)");
         userDetailsManager.setCreateAuthoritySql("INSERT INTO authorities (email, authority) values (?,?)");
         userDetailsManager.setUsersByUsernameQuery("SELECT email, password, enabled FROM customers WHERE email = ?");
-        userDetailsManager.setAuthoritiesByUsernameQuery("SELECT email, authorities FROM authorities WHERE email = ?");
+        userDetailsManager.setAuthoritiesByUsernameQuery("SELECT email, authority FROM authorities WHERE email = ?");
         return userDetailsManager;
     }
 

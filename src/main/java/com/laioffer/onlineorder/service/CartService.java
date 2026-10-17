@@ -16,7 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 
 @Service
@@ -82,9 +85,26 @@ public class CartService {
 
 
     private List<OrderItemDto> getOrderItemDtos(List<OrderItemEntity> orderItems) {
-        List<OrderItemDto> orderItemDtos = new ArrayList<>();
+        List<OrderItemDto> orderItemDtos = new ArrayList<>(orderItems.size());
+        if (orderItems.isEmpty()) {
+            return orderItemDtos;
+        }
+
+        List<Long> menuItemIds = orderItems.stream()
+                .map(OrderItemEntity::menuItemId)
+                .distinct()
+                .toList();
+        Map<Long, MenuItemEntity> menuItemsById = new HashMap<>();
+        for (MenuItemEntity menuItem : menuItemRepository.findAllById(menuItemIds)) {
+            menuItemsById.put(menuItem.id(), menuItem);
+        }
+
+        // Batch query order is unspecified; preserve the order and stored prices of cart rows.
         for (OrderItemEntity orderItem : orderItems) {
-            MenuItemEntity menuItem = menuItemRepository.findById(orderItem.menuItemId()).get();
+            MenuItemEntity menuItem = menuItemsById.get(orderItem.menuItemId());
+            if (menuItem == null) {
+                throw new NoSuchElementException("Menu item referenced by cart is unavailable");
+            }
             OrderItemDto orderItemDto = new OrderItemDto(orderItem, menuItem);
             orderItemDtos.add(orderItemDto);
         }

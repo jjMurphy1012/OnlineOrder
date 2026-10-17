@@ -12,12 +12,14 @@ spring:
       mode: ${INIT_DB:always}
       schema-locations: "classpath:database-init.sql"
   cache:
+    type: caffeine
+    cache-names: cart,restaurants
     caffeine:
-      spec: expireAfterWrite=60s
+      spec: maximumSize=1000,expireAfterWrite=60s
 
 
 logging:
   level:
-    org.apache.coyote.http11.Http11InputBuffer: TRACE # Incoming HTTP requests
-    org.springframework.jdbc.datasource.init: DEBUG
-    org.springframework.jdbc.core: DEBUG # SQL
+    org.apache.coyote.http11.Http11InputBuffer: INFO
+    org.springframework.jdbc.datasource.init: INFO
+    org.springframework.jdbc.core: INFO

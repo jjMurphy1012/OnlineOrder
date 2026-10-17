@@ -123,8 +123,7 @@ public class CartServiceTests {
         // Mock repository method calls
         Mockito.when(cartRepository.getByCustomerId(customerId)).thenReturn(cartEntity);
         Mockito.when(orderItemRepository.getAllByCartId(cartEntity.id())).thenReturn(orderItems);
-        Mockito.when(menuItemRepository.findById(1L)).thenReturn(Optional.of(menuItems.get(0)));
-        Mockito.when(menuItemRepository.findById(2L)).thenReturn(Optional.of(menuItems.get(1)));
+        Mockito.when(menuItemRepository.findAllById(List.of(1L, 2L))).thenReturn(menuItems);
 
 
         // Perform the method under test

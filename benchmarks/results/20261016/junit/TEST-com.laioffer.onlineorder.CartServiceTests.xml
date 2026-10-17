@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.laioffer.onlineorder.CartServiceTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-17T00:25:39.221Z" hostname="Jiajuns-MacAir.local" time="0.011">
+  <properties/>
+  <testcase name="getCart_shouldReturnCartDto()" classname="com.laioffer.onlineorder.CartServiceTests" time="0.001"/>
+  <testcase name="addMenuItemToCart_whenOrderNotExist_shouldCreateOneOrderItem()" classname="com.laioffer.onlineorder.CartServiceTests" time="0.004"/>
+  <testcase name="clearCart_shouldRemoveAllItemsAndResetTotalPrice()" classname="com.laioffer.onlineorder.CartServiceTests" time="0.003"/>
+  <testcase name="addMenuItemToCart_whenOrderAlreadyExist_shouldUpdateOrderItem()" classname="com.laioffer.onlineorder.CartServiceTests" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
