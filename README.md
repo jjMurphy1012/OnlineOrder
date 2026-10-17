@@ -3,7 +3,11 @@ A Spring Boot and React-based ordering system
 
 # Project Introduction
 
-The OnlineOrder system is a food ordering platform that connects customers with restaurants, built on SpringBoot and deployed using Docker. The customer-facing system features restaurant discovery, menu browsing, cart management, and checkout functionality, while the management interface allows restaurants to manage menus, process orders, and track customer data.
+OnlineOrder is a Spring Boot and React ordering demo with restaurant/menu browsing, account registration, session login, and per-customer cart management. The current `/cart/checkout` action clears a cart; it does not process a payment, reserve inventory, or create a persistent fulfilled order. Restaurant administration is not implemented by the controllers in this repository.
+
+## Reproducible verification
+
+The `benchmarks/` directory documents the local PostgreSQL tests and cart-read performance comparison. Measurements use synthetic fixtures and an isolated database; they are not production traffic or AWS service-level results. The benchmark keeps a test-only copy of the original per-item lookup algorithm so the optimized batch read can be compared against it with identical output checks.
 
 
 ![System Image 1](https://github.com/jjMurphy1012/OnlineOrder/raw/main/image/img.png)
@@ -62,7 +66,7 @@ These enhancements will improve user experience and provide additional value to 
     - Adds menu items to the shopping cart
 
 - **Checkout**: `/cart/checkout` (POST)
-    - Processes the order and clears the cart
+    - Clears the current user's cart; payment and order fulfillment are not implemented
 
 ## Data Model
 ### Primary Entities
@@ -74,7 +78,7 @@ These enhancements will improve user experience and provide additional value to 
 
 ## Architecture & Design Patterns
 
-This project implements industry-standard software architecture principles and design patterns to ensure maintainability, scalability, and robust security:
+The application uses a Controller → Service → Repository structure within one Spring Boot application:
 
 ### Core Architecture
 
@@ -82,8 +86,8 @@ This project implements industry-standard software architecture principles and d
 | --- | --- | --- |
 | **Layered Architecture** | Controller → Service → Repository structure | Clear separation of responsibilities, enhanced maintainability |
 | **MVC Pattern** | Spring MVC framework | Separation of concerns, improved testability |
-| **RESTful API Design** | HTTP methods, resource-based endpoints | Stateless communication, scalability |
-| **Microservices Approach** | Decoupled frontend-backend architecture | Independent deployment, technology flexibility |
+| **HTTP API Design** | HTTP methods and resource-based endpoints | Client/server separation; authentication uses server-side sessions |
+| **Application Structure** | One Spring Boot backend and a bundled React build | A layered monolith, not a microservices deployment |
 
 ### Design Patterns
 
@@ -97,41 +101,34 @@ This project implements industry-standard software architecture principles and d
 ### Security Architecture
 
 - **Authentication**: Session-based security implementation via Spring Security
-- **Authorization**: Role-based access control for resource protection
+- **Authorization**: Protected routes require authentication; cart controllers derive the customer from the authenticated principal
 - **Principal Retrieval**: Context-aware user identification using `@AuthenticationPrincipal`
 
 ### Infrastructure & Deployment
 
-- **Containerization**: Docker-based application packaging
-- **Cloud Deployment**: AWS App Runner for managed container orchestration
+- **Deployment exercise**: Docker and AWS screenshots are retained below as historical project context
 - **Database**: PostgreSQL with connection pooling
-- **State Management**: Stateless service design with persistent data layer
+- **State Management**: PostgreSQL persistence, server-side login sessions, and an in-process Caffeine cache
 
-## Deployment Environment
-The system is containerized using Docker with docker-compose for orchestration, ensuring portability and rapid deployment capabilities.
+## Deployment Exercise
 
-### Docker Containerization
-This project uses Docker for containerization, which provides several advantages:
+The original screenshots show a Docker/AWS deployment exercise. This checkout has no Dockerfile and its `docker-compose.yml` is empty, so it does not currently provide a reproducible Compose deployment. Use the local PostgreSQL benchmark instructions for the configuration tested in this repository.
 
-- **Consistent Environment**: Eliminates "works on my machine" issues by ensuring the same environment across development and production
-- **Isolated Services**: Each component (Spring Boot application, PostgreSQL database) runs in its own container
-- **Easy Scaling**: Container orchestration simplifies horizontal scaling as needed
-- **Simplified Deployment**: Single command deployment with docker-compose
+### Docker Screenshot
 
 ![Docker Containers](https://github.com/jjMurphy1012/OnlineOrder/raw/main/image/img_7.png)
 
-### AWS Deployment
-The Online Order System has been successfully deployed to Amazon Web Services (AWS), providing:
+### AWS Screenshot
 
-- **High Availability**: Leveraging AWS's reliable infrastructure
-- **Scalability**: Ability to scale with increasing user demands
-- **Security**: Implementation of AWS security best practices
-- **Global Reach**: Fast access for users regardless of geographic location
-
-The deployment architecture includes:
-- AWS App Runner for hosting and automatically scaling the containerized application
-- RDS PostgreSQL as a managed database service
-- AWS IAM for access control and security
+The original project description identifies AWS App Runner and RDS PostgreSQL as the deployment environment. No current cloud deployment or availability verification is included in the local test results.
 ![AWS Deployment](https://github.com/jjMurphy1012/OnlineOrder/raw/main/image/img_8.png)
 
-This cloud-based solution ensures the application remains robust, secure, and accessible to users while minimizing operational overhead.
+The screenshots document the original deployment exercise. Local benchmark results do not establish cloud availability, throughput, or current deployment health.
+
+## Demo boundaries
+
+- The default SQL initializer drops and recreates the six demo tables. Use a disposable database. Set `INIT_DB=never` when retaining an existing schema and data.
+- The development runner creates a sample user at startup. This is demo setup, not a production identity lifecycle.
+- Cart writes use transactions and invalidate the local cache after successful mutations. Concurrent lost-update prevention and consistency across multiple application instances have not been established.
+- Session authentication currently has CSRF protection disabled. The application requires further security work before production use.
+- Monetary fields currently use Java `double`. A production payment system would require an explicit monetary precision/rounding policy and corresponding tests.

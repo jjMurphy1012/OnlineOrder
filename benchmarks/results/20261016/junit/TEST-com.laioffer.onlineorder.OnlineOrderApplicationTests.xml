@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.laioffer.onlineorder.OnlineOrderApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-17T00:25:40.911Z" hostname="Jiajuns-MacAir.local" time="0.006">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.laioffer.onlineorder.OnlineOrderApplicationTests" time="0.006"/>
+  <system-out><![CDATA[20:25:39.307 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.laioffer.onlineorder.OnlineOrderApplicationTests]: OnlineOrderApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:25:39.378 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.laioffer.onlineorder.OnlineOrderApplication for test class com.laioffer.onlineorder.OnlineOrderApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+2026-10-16T20:25:39.609-04:00  INFO 24131 --- [    Test worker] c.l.o.OnlineOrderApplicationTests        : Starting OnlineOrderApplicationTests using Java 21.0.4 with PID 24131 (started by zhengjiajun in <repository>)
+2026-10-16T20:25:39.610-04:00  INFO 24131 --- [    Test worker] c.l.o.OnlineOrderApplicationTests        : No active profile set, falling back to 1 default profile: "default"
+2026-10-16T20:25:39.963-04:00  INFO 24131 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2026-10-16T20:25:39.993-04:00  INFO 24131 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 26 ms. Found 5 JDBC repository interfaces.
+2026-10-16T20:25:40.200-04:00  INFO 24131 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-16T20:25:40.261-04:00  INFO 24131 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@62360a68
+2026-10-16T20:25:40.262-04:00  INFO 24131 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-16T20:25:40.493-04:00  INFO 24131 --- [    Test worker] o.s.s.p.JdbcUserDetailsManager           : No authentication manager set. Reauthentication of users when changing passwords will not be performed.
+2026-10-16T20:25:40.551-04:00  INFO 24131 --- [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name users
+2026-10-16T20:25:40.595-04:00  INFO 24131 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-10-16T20:25:40.904-04:00  INFO 24131 --- [    Test worker] c.l.o.OnlineOrderApplicationTests        : Started OnlineOrderApplicationTests in 1.45 seconds (process running for 2.81)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
